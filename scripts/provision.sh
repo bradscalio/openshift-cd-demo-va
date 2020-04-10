@@ -144,7 +144,7 @@ OPENSHIFT_USER=${ARG_USERNAME:-$LOGGEDIN_USER}
 PRJ_SUFFIX=${ARG_PROJECT_SUFFIX:-`echo $OPENSHIFT_USER | sed -e 's/[-@].*//g'`}
 GITHUB_ACCOUNT=${GITHUB_ACCOUNT:-gbengataylor}
 GITHUB_REF=${GITHUB_REF:-ocp-4.3}
-REPO_NAME=${REPO_NAME:-openshift-cd-demo}
+REPO_NAME=${REPO_NAME:-openshift-cd-demo-va}
 
 function deploy() {
   oc $ARG_OC_OPS new-project dev-$PRJ_SUFFIX   --display-name="Tasks - Dev"
