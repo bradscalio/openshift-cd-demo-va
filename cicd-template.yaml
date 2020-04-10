@@ -14,7 +14,7 @@ parameters:
   description: Location of templates (it could be github or local machine)
   name: TEMPLATE_LOCATION
   required: true
-  value: "."
+  value: "https://raw.githubusercontent.com/gbengataylor/openshift-cd-demo-va/ocp-4.3"
 - displayName: DEV project name
   value: dev
   name: DEV_PROJECT

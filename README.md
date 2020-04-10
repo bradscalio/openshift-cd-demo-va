@@ -46,15 +46,15 @@ The application used in this pipeline is a JAX-RS application which is available
 You can use the `scripts/provision.sh` script provided to deploy the entire demo:
 
   ```
-  /scripts/provision.sh --help
-  /scripts/provision.sh deploy 
-  /scripts/provision.sh delete 
+  ./scripts/provision.sh --help
+  ./scripts/provision.sh deploy 
+  ./scripts/provision.sh delete 
   ```
 
 To run this with local development
 
   ```
-  /scripts/provision.sh deploy --private
+  ./scripts/provision.sh deploy --private
   ```
 
 If you want to use Quay.io as an external registry with this demo, Go to quay.io and register for free. Then deploy the demo providing your 
