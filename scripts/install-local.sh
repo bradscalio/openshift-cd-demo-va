@@ -168,9 +168,10 @@ function deploy() {
     git add *
     git commit -m "commit"
     git remote add origin http://$GOGS_SVC/$GOGS_USER/$REPO_NAME.git
+    git remote set-url origin http://$GOGS_USER:$GOGS_PWD@$GOGS_SVC/$GOGS_USER/$REPO_NAME.git
 
     echo "pushing to gogs, you might be asked for credentials"
-    echo "enter $GOGS_USER for user and $GOGS_PWD for password"
+    #echo "enter $GOGS_USER for user and $GOGS_PWD for password"
     git push -u origin master
 
     popd
