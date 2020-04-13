@@ -43,20 +43,30 @@ The application used in this pipeline is a JAX-RS application which is available
 [Download and install CodeReady Containers](https://developers.redhat.com/products/codeready-containers/overview) in order to create a local OpenShift 4 cluster on your workstation. Otherwise [create an OpenShift 4 cluster](https://try.openshift.com) on the public cloud or the infrastructure of your choice.
 
 ## Automated Deploy on OpenShift
-You can use the `scripts/provision.sh` script provided to deploy the entire demo:
+
+If you are in a Disconnected environment, please run the following command first
+
+```
+./scripts/install-local.sh deploy
+```
+
+You can use the `scripts/provision.sh` script provided to deploy the entire demo in a disconnected environment:
 
   ```
   ./scripts/provision.sh --help
-  ./scripts/provision.sh deploy 
-  ./scripts/provision.sh delete 
-  ```
-
-To run this with local development
-
-  ```
   ./scripts/provision.sh deploy --private
   ```
 
+To run this in a fully public environment, you can remove the --private option
+
+
+To delete everything
+  ```
+  ./scripts/provision.sh delete 
+  ./scripts/install-local.sh delete
+  ```
+
+*NOTE*: Quay.io isn't an option
 If you want to use Quay.io as an external registry with this demo, Go to quay.io and register for free. Then deploy the demo providing your 
 quay.io credentials:
 
@@ -67,39 +77,7 @@ In that case, the pipeline would create an image repository called `tasks-app` (
 on your Quay.io account and use that instead of the integrated OpenShift 
 registry, for pushing the built images and also pulling images for deployment. 
   
-## Manual Deploy on OpenShift
 
-Create the following projects for CI/CD components, Dev and Stage environments:
-
-  ```shell
-  # Create Projects
-  oc new-project dev --display-name="Tasks - Dev"
-  oc new-project stage --display-name="Tasks - Stage"
-  oc new-project cicd --display-name="CI/CD"
-
-  # Grant Jenkins Access to Projects
-  oc policy add-role-to-group edit system:serviceaccounts:cicd -n dev
-  oc policy add-role-to-group edit system:serviceaccounts:cicd -n stage
-  ```  
-
-And then deploy the demo:
-
-  ```
-  # Deploy Demo
-  oc new-app -n cicd -f cicd-template.yaml
-  ```
-
-To use custom project names, change `cicd`, `dev` and `stage` in the above commands to
-your own names and use the following to create the demo:
-
-  ```shell
-  oc new-app -n cicd -f cicd-template.yaml --param DEV_PROJECT=dev-project-name --param STAGE_PROJECT=stage-project-name
-  ```
-
-# JBoss EAP vs WildFly
-
-This demo by default uses the WildFly community image. You can use the JBoss EAP enterprise images provide by Red Hat by simply editing the 
-`tasks` build config in the _Tasks - Dev_ project and changing the builder image from `wildfly` to `jboss-eap70-openshift:1.5`. The demo would work exactly the same and would build the images using the JBoss EAP builder image. If using Quay, be sure not to leave the JBoss EAP images on a publicly accessible image repository. 
 
 ## Troubleshooting
 

@@ -180,6 +180,15 @@ function deploy() {
   local CICD_TEMPLATE_LOCATION=$TEMPLATE_LOCATION
   if [ $ARG_PRIVATE == true ] ; then
     CICD_TEMPLATE_LOCATION=$CURR_DIR
+    # set local template to gogs
+    local GOGS_NAMESPACE=gogs-$PRJ_SUFFIX
+    local HOSTNAME=$(oc get route jenkins -o template --template='{{.spec.host}}' | sed "s/jenkins-${GOGS_NAMESPACE}.//g")
+   # local GOGS_HOSTNAME="gogs-$GOGS_NAMESPACE.$HOSTNAME"
+    #local GOGS_SVC=$(oc get route gogs -n $GOGS_NAMESPACE -o template --template='{{.spec.host}}')
+    local GOGS_SVC=gogs.$GOGS_NAMESPACE:3000
+    TEMPLATE_LOCATION=http://$GOGS_SVC/gogs/$REPO_NAME/raw/master
+    echo "Private mode: using TEMPLATE LOCATION instead: $TEMPLATE_LOCATION"
+    # exit
   fi
 
   # add EAP images
