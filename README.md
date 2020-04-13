@@ -44,10 +44,10 @@ The application used in this pipeline is a JAX-RS application which is available
 
 ## Automated Deploy on OpenShift
 
-If you are in a Disconnected environment, please run the following command first
+If you are in a Disconnected environment, please run the following command first to install all the templates locally.
 
 ```
-./scripts/install-local.sh deploy
+./scripts/install-local-templates.sh deploy
 ```
 
 You can use the `scripts/provision.sh` script provided to deploy the entire demo in a disconnected environment:
@@ -63,7 +63,7 @@ To run this in a fully public environment, you can remove the --private option
 To delete everything
   ```
   ./scripts/provision.sh delete 
-  ./scripts/install-local.sh delete
+  ./scripts/install-local-templates.sh delete
   ```
 
 *NOTE*: Quay.io isn't an option
