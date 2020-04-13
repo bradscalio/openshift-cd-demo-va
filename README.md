@@ -6,9 +6,7 @@ This repository includes the infrastructure and pipeline definition for continuo
 
 * [Introduction](#introduction)
 * [Prerequisites](#prerequisites)
-* [Deploy on RHPDS](#deploy-on-rhpds)
 * [Automated Deploy on OpenShift](#automatic-deploy-on-openshift)
-* [Manual Deploy on OpenShift](#manual-deploy-on-openshift)
 * [Troubleshooting](#troubleshooting)
 * [Demo Guide](#demo-guide)
 * [Using Eclipse Che for Editing Code](#using-eclipse-che-for-editing-code)
