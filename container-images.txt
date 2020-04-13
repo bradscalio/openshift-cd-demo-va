@@ -1,0 +1,8 @@
+#images
+
+quay.io/gbengataylor/nexus3 
+quay.io/gbengataylor/sonarqube 
+quay.io/siamaksade/gogs
+quay.io/gbengataylor/jenkins-slave-skopeo-centos7
+registry.access.redhat.com/jboss-eap-7/eap70-openshift
+quay.io/openshift/origin-cli:
