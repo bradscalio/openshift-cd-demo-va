@@ -1,3 +1,7 @@
+The following diagram shows the steps included in the deployment pipeline:
+
+![](images/pipeline.svg)
+
 *NOTE*: Quay.io isn't an option
 If you want to use Quay.io as an external registry with this demo, Go to quay.io and register for free. Then deploy the demo providing your 
 quay.io credentials:

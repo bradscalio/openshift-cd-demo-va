@@ -329,14 +329,17 @@ objects:
             oc expose svc/tasks -n ${DEV_PROJECT}
             oc set probe dc/tasks --readiness --get-url=http://:8080/ws/demo/healthcheck --initial-delay-seconds=30 --failure-threshold=10 --period-seconds=10 -n ${DEV_PROJECT}
             oc set probe dc/tasks --liveness  --get-url=http://:8080/ws/demo/healthcheck --initial-delay-seconds=180 --failure-threshold=10 --period-seconds=10 -n ${DEV_PROJECT}
-            oc rollout cancel dc/tasks -n ${STAGE_PROJECT}
+            
 
             # stage project
             oc expose dc/tasks --port=8080 -n ${STAGE_PROJECT}
             oc expose svc/tasks -n ${STAGE_PROJECT}
             oc set probe dc/tasks --readiness --get-url=http://:8080/ws/demo/healthcheck --initial-delay-seconds=30 --failure-threshold=10 --period-seconds=10 -n ${STAGE_PROJECT}
             oc set probe dc/tasks --liveness  --get-url=http://:8080/ws/demo/healthcheck --initial-delay-seconds=180 --failure-threshold=10 --period-seconds=10 -n ${STAGE_PROJECT}
+           
+            #cancel both rollouts
             oc rollout cancel dc/tasks -n ${DEV_PROJECT}
+            oc rollout cancel dc/tasks -n ${STAGE_PROJECT}
 
             # deploy gogs
             HOSTNAME=$(oc get route jenkins -o template --template='{{.spec.host}}' | sed "s/jenkins-${CICD_NAMESPACE}.//g")
