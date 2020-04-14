@@ -178,6 +178,7 @@ function deploy() {
 
   local TEMPLATE_LOCATION=https://raw.githubusercontent.com/$GITHUB_ACCOUNT/$REPO_NAME/$GITHUB_REF
   local CICD_TEMPLATE_LOCATION=$TEMPLATE_LOCATION
+  local CLONE_REPO=https://github.com/OpenShiftDemos/openshift-tasks.git
   if [ $ARG_PRIVATE == true ] ; then
     CICD_TEMPLATE_LOCATION=$CURR_DIR
     # set local template to gogs
@@ -188,6 +189,9 @@ function deploy() {
     local GOGS_SVC=gogs.$GOGS_NAMESPACE:3000
     TEMPLATE_LOCATION=http://$GOGS_SVC/gogs/$REPO_NAME/raw/master
     echo "Private mode: using TEMPLATE LOCATION instead: $TEMPLATE_LOCATION"
+
+    #set clone repo
+    CLONE_REPO=http://$GOGS_SVC/gogs/openshift-tasks.git
     # exit
   fi
 
@@ -205,11 +209,15 @@ function deploy() {
 
 
   local template=$CICD_TEMPLATE_LOCATION/cicd-template.yaml
+
   echo "Using template $template"
+  echo "Using clone repo $CLONE_REPO"
+
   oc $ARG_OC_OPS new-app -f $template -p TEMPLATE_LOCATION=$TEMPLATE_LOCATION \
    -p DEV_PROJECT=dev-$PRJ_SUFFIX \
   -p STAGE_PROJECT=stage-$PRJ_SUFFIX -p EPHEMERAL=$ARG_EPHEMERAL -p ENABLE_QUAY=$ARG_ENABLE_QUAY \
-  -p QUAY_USERNAME=$ARG_QUAY_USER -p QUAY_PASSWORD=$ARG_QUAY_PASS -n cicd-$PRJ_SUFFIX 
+  -p QUAY_USERNAME=$ARG_QUAY_USER -p QUAY_PASSWORD=$ARG_QUAY_PASS \
+  -p CLONE_REPO=$CLONE_REPO -n cicd-$PRJ_SUFFIX 
 }
 
 function make_idle() {

@@ -151,15 +151,27 @@ function deploy() {
     done 
 
     # curl      
+    echo "creating templates repo"
     _RETURN=$(curl -o /tmp/curl.log -sL -w "%{http_code}" -H "Content-Type: application/json" \
     -H 'Accept:application/json' -u $GOGS_USER:$GOGS_PWD -X POST http://$GOGS_SVC/api/v1/user/repos -d @data.json)
 
     if [ $_RETURN != "201" ] ;then
-        echo "ERROR: Failed to import openshift-tasks GitHub repo"
+        echo "ERROR: Failed to create templates GitHub repo"
         cat /tmp/curl.log
         exit 255
     fi
 
+    echo "creating openshift-tasks repo"
+    _RETURN=$(curl -o /tmp/curl.log -sL -w "%{http_code}" -H "Content-Type: application/json" \
+    -H 'Accept:application/json' -u $GOGS_USER:$GOGS_PWD -X POST http://$GOGS_SVC/api/v1/user/repos -d @src/openshift-tasks.json)
+
+    if [ $_RETURN != "201" ] ;then
+        echo "ERROR: Failed to create openshift-tasks GitHub repo"
+        cat /tmp/curl.log
+        exit 255
+    fi
+
+    echo "uploading code to templates repo"
     #create repo
     mkdir -p gogs/$REPO_NAME/templates
     cp templates/* gogs/$REPO_NAME/templates
@@ -176,6 +188,30 @@ function deploy() {
 
     popd
     rm -rf gogs
+
+    echo "uploading master branch to openshift-tasks repo"
+    unzip -o src/openshift-tasks-master.zip -d /tmp
+    pushd /tmp/openshift-tasks
+    git init
+    git add *
+    git add .editorconfig .gitignore .travis.yml
+    git commit -m "master commit"
+    git remote add origin http://$GOGS_SVC/$GOGS_USER/openshift-tasks.git
+    git remote set-url origin http://$GOGS_USER:$GOGS_PWD@$GOGS_SVC/$GOGS_USER/openshift-tasks.git
+    git push -u origin master
+    popd
+
+    echo "uploading eap-7 branch to openshift-tasks repo"
+    unzip -o src/openshift-tasks-eap.zip -d /tmp
+    pushd /tmp/openshift-tasks
+    git branch eap-7
+    git checkout eap-7
+    git add *
+    git add .editorconfig .gitignore .travis.yml
+    git commit -m "eap-7 commit"
+    git push -u origin eap-7
+    popd
+    rm -rf /tmp/openshift-tasks
     #remove jenkins
     oc delete all -lapp=jenkins-ephemeral
 }

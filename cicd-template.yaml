@@ -49,6 +49,11 @@ parameters:
   name: QUAY_REPOSITORY
   required: true
   value: tasks-app
+- displayName: Source code to clone
+  description: Source Code to clone  
+  name: CLONE_REPO
+  required: true
+  value: https://github.com/OpenShiftDemos/openshift-tasks.git
 objects:
 - apiVersion: v1
   groupNames: null
@@ -416,7 +421,7 @@ objects:
             # TODO make this local
             cat <<EOF > /tmp/data.json
             {
-              "clone_addr": "https://github.com/OpenShiftDemos/openshift-tasks.git",
+              "clone_addr": "${CLONE_REPO}",
               "uid": 1,
               "repo_name": "openshift-tasks"
             }
