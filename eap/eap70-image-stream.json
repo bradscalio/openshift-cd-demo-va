@@ -112,7 +112,7 @@
                         },
                         "from": {
                             "kind": "DockerImage",
-                            "name": "registry.access.redhat.com/jboss-eap-7/eap70-openshift:1.7"
+                            "name": "registry.access.redhat.com/jboss-eap-7/eap70-openshift:latest"
                         }
                     }
                 ]

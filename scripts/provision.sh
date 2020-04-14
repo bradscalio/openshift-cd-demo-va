@@ -196,6 +196,14 @@ function deploy() {
   oc create -f $CICD_TEMPLATE_LOCATION/eap/eap70-image-stream.json -n stage-$PRJ_SUFFIX
   oc create -f $CICD_TEMPLATE_LOCATION/eap/eap70-image-stream.json -n cicd-$PRJ_SUFFIX
 
+# uncomment if only have access to quay.io, make sure images available in quay.io beforehand
+#   sed '1,$ s/registry.access.redhat.com/quay.io/g' $CICD_TEMPLATE_LOCATION/eap/eap70-image-stream.json | sed '1,$s/jboss-eap-7/gbengataylor/g' > /tmp/temp.json
+#   oc create -f /tmp/temp.json -n dev-$PRJ_SUFFIX 
+#   oc create -f /tmp/temp.json -n stage-$PRJ_SUFFIX
+#   oc create -f /tmp/temp.json -n cicd-$PRJ_SUFFIX
+#   rm /tmp/temp.json
+
+
   local template=$CICD_TEMPLATE_LOCATION/cicd-template.yaml
   echo "Using template $template"
   oc $ARG_OC_OPS new-app -f $template -p TEMPLATE_LOCATION=$TEMPLATE_LOCATION \

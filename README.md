@@ -62,19 +62,7 @@ To delete everything
   ```
   ./scripts/provision.sh delete 
   ./scripts/install-local-templates.sh delete
-  ```
-
-*NOTE*: Quay.io isn't an option
-If you want to use Quay.io as an external registry with this demo, Go to quay.io and register for free. Then deploy the demo providing your 
-quay.io credentials:
-
-  ```
- /scripts/provision.sh deploy --enable-quay --quay-username quay_username --quay-password quay_password
-  ```
-In that case, the pipeline would create an image repository called `tasks-app` (default name but configurable) 
-on your Quay.io account and use that instead of the integrated OpenShift 
-registry, for pushing the built images and also pulling images for deployment. 
-  
+  ```  
 
 
 ## Troubleshooting
@@ -105,9 +93,7 @@ registry, for pushing the built images and also pulling images for deployment.
 
 * During pipeline execution, verify a new Jenkins slave pod is created within _CI/CD_ project to execute the pipeline.
 
-* If you have enabled Quay, after image build completes go to quay.io and show that a image repository is created and contains the Tasks app image
 
-![](images/quay-pushed.png?raw=true)
 
 * Pipelines pauses at _Deploy STAGE_ for approval in order to promote the build to the STAGE environment. Click on this step on the pipeline and then _Promote_.
 
@@ -116,11 +102,9 @@ registry, for pushing the built images and also pulling images for deployment.
   * Explore SonarQube and show the metrics, stats, code coverage, etc
   * Explore _Tasks - Dev_ project in OpenShift console and verify the application is deployed in the DEV environment
   * Explore _Tasks - Stage_ project in OpenShift console and verify the application is deployed in the STAGE environment  
-  * If Quay enabled, click on the image tag in quay.io and show the security scannig results 
 
 ![](images/sonarqube-analysis.png?raw=true)
 
-![](images/quay-claire.png?raw=true)
 
 * Clone and checkout the _eap-7_ branch of the _openshift-tasks_ git repository and using an IDE (e.g. JBoss Developer Studio), remove the ```@Ignore``` annotation from ```src/test/java/org/jboss/as/quickstarts/tasksrs/service/UserResourceTest.java``` test methods to enable the unit tests. Commit and push to the git repo.
 
