@@ -143,7 +143,7 @@ LOGGEDIN_USER=$(oc $ARG_OC_OPS whoami)
 OPENSHIFT_USER=${ARG_USERNAME:-$LOGGEDIN_USER}
 PRJ_SUFFIX=${ARG_PROJECT_SUFFIX:-`echo $OPENSHIFT_USER | sed -e 's/[-@].*//g'`}
 GITHUB_ACCOUNT=${GITHUB_ACCOUNT:-gbengataylor}
-GITHUB_REF=${GITHUB_REF:-ocp-4.3}
+GITHUB_REF=${GITHUB_REF:-ocp-4.3-disconnected}
 REPO_NAME=${REPO_NAME:-openshift-cd-demo-va}
 
 function deploy() {
