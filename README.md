@@ -2,7 +2,7 @@
 
 # CI/CD Demo - OpenShift Container Platform 4.3
 
-This repository includes the infrastructure and pipeline definition for continuous delivery using Jenkins, Nexus, SonarQube and Eclipse Che on OpenShift. 
+This repository includes the infrastructure and pipeline definition for continuous delivery using Jenkins, Nexus, SonarQube and CodeReady Workspaces/Eclipse Che (Optional) on OpenShift. 
 
 * [Introduction](#introduction)
 * [Prerequisites](#prerequisites)
