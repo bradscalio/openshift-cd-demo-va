@@ -41,13 +41,13 @@ The application used in this pipeline is a JAX-RS application which is available
 
 ## Automated Deploy on OpenShift
 
-If you are in a Disconnected environment, please run the following command first to install all the templates locally.
+Please run the following command first to install all the templates locally.
 
 ```
 ./scripts/install-local-templates.sh deploy
 ```
 
-You can use the `scripts/provision.sh` script provided to deploy the entire demo in a disconnected environment:
+You can use the `scripts/provision.sh` script provided to deploy the entire demo 
 
   ```
   ./scripts/provision.sh --help
