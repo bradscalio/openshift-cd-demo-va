@@ -19,11 +19,10 @@ On every pipeline execution, the code goes through the following steps:
 1. Code is cloned from Gogs, built, tested and analyzed for bugs and bad patterns
 2. The WAR artifact is pushed to Nexus Repository manager
 3. A container image (_tasks:latest_) is built based on the _Tasks_ application WAR artifact deployed on WildFly
-4. If Quay.io is enabled, the Tasks app container image is pushed to the quay.io image registry and a security scan is scheduled
-4. The _Tasks_ container image is deployed in a fresh new container in DEV project (pulled form Quay.io, if enabled)
+4. The _Tasks_ container image is deployed in a fresh new container in DEV project 
 5. If tests successful, the pipeline is paused for the release manager to approve the release to STAGE
-6. If approved, the DEV image is tagged in the STAGE project. If Quay.io is enabled, the image is tagged in the Quay.io image repository using [Skopeo](https://github.com/containers/skopeo)
-6. The staged image is deployed in a fresh new container in the STAGE project (pulled form Quay.io, if enabled)
+6. If approved, the DEV image is tagged in the STAGE project. 
+6. The staged image is deployed in a fresh new container in the STAGE project
 
 The following diagram shows the steps included in the deployment pipeline:
 
