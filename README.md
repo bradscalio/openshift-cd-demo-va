@@ -6,7 +6,7 @@ This repository includes the infrastructure and pipeline definition for continuo
 
 * [Introduction](#introduction)
 * [Prerequisites](#prerequisites)
-* [Automated Deploy on OpenShift](#automated-deploy-on-openshift)
+* [Deploy on OpenShift](#deploy-on-openshift)
 * [Troubleshooting](#troubleshooting)
 * [Demo Guide](#demo-guide)
 * [Using Eclipse Che for Editing Code](#using-eclipse-che-for-editing-code)
@@ -34,16 +34,30 @@ The application used in this pipeline is a JAX-RS application which is available
 ## Prerequisites
 * 10+ GB memory
 
+* **Get OpenShift 4**: [Download and install CodeReady Containers](https://developers.redhat.com/products/codeready-containers/overview) in order to create a local OpenShift 4 cluster on your workstation. Otherwise [create an OpenShift 4 cluster](https://try.openshift.com) on the public cloud or the infrastructure of your choice.
 
-# Get OpenShift 4
+* Set your git user name and email
+```
+git config user.name "First Last"
+git congig user.email "first.last@email.com"
+```
 
-[Download and install CodeReady Containers](https://developers.redhat.com/products/codeready-containers/overview) in order to create a local OpenShift 4 cluster on your workstation. Otherwise [create an OpenShift 4 cluster](https://try.openshift.com) on the public cloud or the infrastructure of your choice.
+* Login into the openshift cluster
 
-## Automated Deploy on OpenShift
+## Deploy on OpenShift
 
+When the demo is deployed, the following will be created:
+* a cicd project where Jenkins, Nexus, Gogs, and Sonarqube are deployed and running
+* a dev project representing the DEV environment
+* a stage project representing the STAGING environment
+
+Each project is appended with the username. For e.g if user is user1, the cicd project will be created as cicd-user1.
+
+### Running the deployment
 Please run the following command first to install all the templates locally.
 
 ```
+./scripts/install-local-templates.sh --help
 ./scripts/install-local-templates.sh deploy
 ```
 
@@ -55,6 +69,8 @@ You can use the `scripts/provision.sh` script provided to deploy the entire demo
   ```
 
 To run this in a fully public environment, you can remove the --private option
+
+To append the projects with a value other than the user, use the --project-suffix option
 
 
 To delete everything
