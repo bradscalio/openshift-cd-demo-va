@@ -137,7 +137,7 @@ To delete everything
 
 ## Using Eclipse Che for Editing Code
 
-You can install Eclipse Che on OpenShift 4 using the OperatorHub. Follow the [Installing Che on OpenShift 4 from OperatorHub](https://www.eclipse.org/che/docs/che-7/installing-che-on-openshift-4-from-operatorhub/) docs in order to install Eclipse Che 7. Alternatively, if you OpenShift cluster is accessible over the internet, you can use the hosted Eclipse Che service at https://che.openshift.io .
+You can install CodeReady Workspaces on OpenShift 4 using the OperatorHub. Follow the [Installing Che on OpenShift 4 from OperatorHub](https://www.eclipse.org/che/docs/che-7/installing-che-on-openshift-4-from-operatorhub/) docs in order to install Eclipse Che 7. Alternatively, if you OpenShift cluster is accessible over the internet, you can use the hosted Eclipse Che service at https://che.openshift.io .
 
 
 You can then follow these [instructions](docs/using-eclipse-che.md) to use Eclipse Che for editing code in the above demo flow.  
